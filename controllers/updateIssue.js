@@ -29,6 +29,7 @@ const updateIssue = async (req, res) => {
     res.send({ result: "successfully updated", _id });
   } catch (err) {
     console.error("🔴 Error updating issue 🔴 ⮕ ", err);
+    res.status(500).json({ error: "An error occurred while updating the issue" });
   }
 };
 

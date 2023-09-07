@@ -1,11 +1,9 @@
 const Issue = require("../models/Issue");
 
 const getAllIssues = async (req, res) => {
+  const { project } = req.params;
   try {
-  const project_name = req.params.project;
-  const filters = { project_name };
-
-  // Define the query fields
+  const filters = { project };
   const queryFields = [
     "issue_title",
     "issue_text",
@@ -24,6 +22,7 @@ const getAllIssues = async (req, res) => {
   res.send(issues);
 } catch (err) {
   console.error("🔴 Error fetching issues 🔴 ⮕ ", err);
+  res.status(500).json({ error: `An error occurred while fetching ${project && `"${project}" project`} issues` });
 }
 };
 

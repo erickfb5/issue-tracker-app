@@ -42,7 +42,7 @@ mongoose.connection.once("open", () => {
         try {
           runner.run();
         } catch (err) {
-          console.log("🔴🔴🔴 ⮕  Tests are not valid:");
+          console.log("🔴 🔴 🔴 ⮕  Tests are not valid:");
           console.error(err);
         }
       }, 3500);

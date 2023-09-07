@@ -10,7 +10,7 @@ const issueSchema = new Schema({
   assigned_to: { type: String, default: "" },
   open: { type: Boolean, default: true },
   status_text: { type: String, default: "" },
-  project_name: { type: String },
+  project: { type: String },
 });
 
 const Issue = mongoose.model("Issue", issueSchema);
