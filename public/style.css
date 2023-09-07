@@ -45,7 +45,7 @@ form {
 
 input[type="text"],
 textarea {
-  width: 100%;
+  width: 15%;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -53,6 +53,7 @@ textarea {
 }
 
 button[type="submit"] {
+  width: 15%;
   background-color: #007bff;
   color: #fff;
   padding: 10px 20px;

@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const runner = require("./test-runner");
+const runner = require("./tests/test-runner");
 const { logEvents } = require("./utils/logEvents.js");
 const { rootRoutes, projectRoutes, issuesRoutes  } = require("./routes");
 const { loggerMiddleware, notFoundMiddleware } = require("./middlewares/");

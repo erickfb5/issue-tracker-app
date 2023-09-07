@@ -11,7 +11,7 @@
     <header>
       <h1>Issue Tracker</h1>
     </header>
-    <section style="margin: 0 50px">
+    <section style="margin: 30px">
       <h3>Example <code>GET</code> usage</h3>
       <code>/api/issues/{project}</code><br />
       <code>/api/issues/{project}?open=true&amp;assigned_to=Bill</code><br />
@@ -47,14 +47,12 @@
           type="text"
           name="issue_title"
           placeholder="*Title"
-          style="width: 100px"
           required=""
         /><br />
         <textarea
           type="text"
           name="issue_text"
           placeholder="*Text"
-          style="width: 100px"
           required=""
         ></textarea
         ><br />
@@ -62,20 +60,17 @@
           type="text"
           name="created_by"
           placeholder="*Created by"
-          style="width: 100px"
           required=""
         /><br />
         <input
           type="text"
           name="assigned_to"
           placeholder="(opt)Assigned to"
-          style="width: 100px"
         /><br />
         <input
           type="text"
           name="status_text"
           placeholder="(opt)Status text"
-          style="width: 100px"
         /><br />
         <button type="submit">Submit Issue</button>
       </form>
@@ -88,39 +83,33 @@
           type="text"
           name="_id"
           placeholder="*_id"
-          style="width: 100px"
           required=""
         /><br />
         <input
           type="text"
           name="issue_title"
           placeholder="(opt)Title"
-          style="width: 100px"
         /><br />
         <textarea
           type="text"
           name="issue_text"
           placeholder="(opt)Text"
-          style="width: 100px"
         ></textarea
         ><br />
         <input
           type="text"
           name="created_by"
           placeholder="(opt)Created by"
-          style="width: 100px"
         /><br />
         <input
           type="text"
           name="assigned_to"
           placeholder="(opt)Assigned to"
-          style="width: 100px"
         /><br />
         <input
           type="text"
           name="status_text"
           placeholder="(opt)Status text"
-          style="width: 100px"
         /><br />
         <label
           ><input type="checkbox" name="open" value="false" /> Check to close
@@ -135,72 +124,20 @@
           type="text"
           name="_id"
           placeholder="_id"
-          style="width: 100px"
           required=""
         /><br />
         <button type="submit">Delete Issue</button>
       </form>
-      <code id="jsonResult"></code>
+      <code><p style="font-size: larger;" id="jsonResult"></p></code>
     </section>
-    <hr style="margin: 50px; margin-top: 200px" />
+    <hr style="margin: 50px;" />
     <!-- Your web-app is https, so your scripts need to be too -->
     <script
       src="https://code.jquery.com/jquery-2.2.1.min.js"
       integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
       crossorigin="anonymous"
     ></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const testForm = document.getElementById("testForm");
-        const testForm2 = document.getElementById("testForm2");
-        const testForm3 = document.getElementById("testForm3");
-        const jsonResult = document.getElementById("jsonResult");
-
-        function makeAjaxRequest(url, type, data, callback) {
-          const xhr = new XMLHttpRequest();
-          xhr.open(type, url, true);
-          xhr.setRequestHeader(
-            "Content-Type",
-            "application/x-www-form-urlencoded; charset=UTF-8"
-          );
-
-          xhr.onload = () => {
-            if (xhr.status === 200) {
-              const responseData = JSON.parse(xhr.responseText);
-              callback(responseData);
-            } else {
-              console.error("Error:", xhr.status, xhr.statusText);
-            }
-          };
-
-          xhr.onerror = () => console.error("Network Error");
-          xhr.send(data);
-        }
-
-        testForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-          makeAjaxRequest("/api/issues/apitest", "POST",
-            new URLSearchParams(new FormData(testForm)),
-            (data) => jsonResult.textContent = JSON.stringify(data)
-          );
-        });
-
-        testForm2.addEventListener("submit", (e) => {
-          e.preventDefault();
-          makeAjaxRequest("/api/issues/apitest", "PUT",
-          new URLSearchParams(new FormData(testForm2)),
-            (data) => jsonResult.textContent = JSON.stringify(data)
-          );
-        });
-
-        testForm3.addEventListener("submit", (e) => {
-          e.preventDefault();
-          makeAjaxRequest("/api/issues/apitest", "DELETE",
-            new URLSearchParams(new FormData(testForm3)),
-            (data) => jsonResult.textContent = JSON.stringify(data)
-          );
-        });
-      });
-    </script>
+   <script src="../public/js/main.js"></script>
+   <script src="../public/js/makeAjaxRequest.js"></script>
   </body>
 </html>
