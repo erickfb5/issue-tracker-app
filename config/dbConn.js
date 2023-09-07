@@ -4,7 +4,7 @@ const connectDB = async () => {
   try {
     await connect(process.env.MONGO_URI);
   } catch (err) {
-    console.log(`🔴🔴🔴 ⮕ `, err);
+    console.log(`🔴 🔴 🔴 ⮕ `, err);
   }
 };
 

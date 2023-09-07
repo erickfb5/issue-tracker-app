@@ -1,9 +1,8 @@
 const Issue = require("../models/Issue");
 
 const getAllIssues = async (req, res) => {
+  try {
   const project_name = req.params.project;
-
-  // Initialize filters with the project_name
   const filters = { project_name };
 
   // Define the query fields
@@ -23,6 +22,9 @@ const getAllIssues = async (req, res) => {
 
   const issues = await Issue.find(filters);
   res.send(issues);
+} catch (err) {
+  console.error("🔴 Error fetching issues 🔴 ⮕ ", err);
+}
 };
 
 module.exports = { getAllIssues };

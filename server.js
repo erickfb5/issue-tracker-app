@@ -6,11 +6,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
-const fccTestingRoutes = require("./routes/fcctesting.js");
 const runner = require("./test-runner");
-const { logEvents, loggerMiddleware } = require("./middlewares/logger");
-const { notFoundMiddleware } = require("./middlewares/notFound");
+const { logEvents } = require("./utils/logEvents.js");
 const { rootRoutes, projectRoutes, issuesRoutes  } = require("./routes");
+const { loggerMiddleware, notFoundMiddleware } = require("./middlewares/");
 
 const connectDB = require("./config/dbConn");
 connectDB();
@@ -19,13 +18,10 @@ console.log(`🟡 🟡 🟡 ⮕  NODE ENVIRONMENT: ${process.env.NODE_ENV}`);
 
 const app = express();
 
-//For FCC testing purposes
-fccTestingRoutes(app);
-
 app.use(loggerMiddleware);
 
 app.use("/public", express.static(process.cwd() + "/public"));
-app.use(cors({ origin: "*" })); //For FCC testing purposes only
+app.use(cors({ origin: "*" })); 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
