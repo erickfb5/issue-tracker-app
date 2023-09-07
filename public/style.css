@@ -1,23 +1,117 @@
 * {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  padding: 10px;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
 }
 
+header {
+  background-color: #007bff;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Links */
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+form {
+  margin: 20px 0;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Issue Page */
 .issue {
-  margin: 20px;
-  padding: 5px;
-  width: 60%;
-  border: 2px solid black;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  margin: 20px 0;
+  background-color: #fff;
+}
+
+.issue h3 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.issue p {
+  margin: 5px 0;
 }
 
 .closed {
-  background-color: lightgrey;
+  background-color: #7777776e
 }
 
 .id {
-  font-size: 10.5px;
+  font-size: 1rem;
+  color: #777;
+}
+
+textarea {
+  resize: none;
+}
+
+.toggleIssue, .deleteIssue{
+  font-size: .75rem;
+  background-color: #002aff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+ text-transform: uppercase;
+  font-weight: bold;
+}
+
+.deleteIssue{
+  background-color:firebrick;
+}
+
+.toggleIssue:hover, .deleteIssue:hover {
+ opacity: .7;
 }
