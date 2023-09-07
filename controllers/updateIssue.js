@@ -24,7 +24,7 @@ const updateIssue = async (req, res) => {
 
     issueToUpdate.updated_on = new Date();
     await issueToUpdate.save();
-    console.log(`🔄 ⮕  Issue 🆔 "${_id}" has been updated`);
+    console.log(`🔄 ⮕  Issue 🆔 "${_id}" has been updated on "${issueToUpdate.project.toUpperCase()}" project`);
 
     res.send({ result: "successfully updated", _id });
   } catch (err) {
