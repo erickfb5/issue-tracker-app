@@ -1,11 +1,11 @@
-const setupFormHandlers = () => {
-    const testForm = document.getElementById("testForm");
-    const testForm2 = document.getElementById("testForm2");
-    const testForm3 = document.getElementById("testForm3");
+const setupMainPage = () => { // index.html
+    const submitForm = document.getElementById("submitForm");
+    const updateForm = document.getElementById("updateForm");
+    const deleteForm = document.getElementById("deleteForm");
   
-    handleFormRequest(testForm, "POST");
-    handleFormRequest(testForm2, "PUT");
-    handleFormRequest(testForm3, "DELETE");
+    handleFormRequest(submitForm, "POST");
+    handleFormRequest(updateForm, "PUT");
+    handleFormRequest(deleteForm, "DELETE");
   }
   
-  document.addEventListener("DOMContentLoaded", setupFormHandlers);
+  document.addEventListener("DOMContentLoaded", setupMainPage);

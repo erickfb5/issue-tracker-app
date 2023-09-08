@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Issue Tracker - Project Page</title>
-    <link rel="stylesheet" href="/public/style.css" />
+    <link rel="stylesheet" href="/public/css/style.css" />
   </head>
   <body>
     <header>
@@ -28,7 +28,7 @@
         </form>
       </div>
 
-      <div id="issueDisplay"></div>
+      <div id="issueContainer"></div>
 
       <hr style="margin: 50px; margin-top: 200px" />
     </center>
@@ -38,128 +38,15 @@
       integrity="sha256-gvQgAFzTH6trSrAWoH1iPo9Xc96QxSZ3feW6kem+O00="
       crossorigin="anonymous"
     ></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const currentProject = window.location.pathname.replace(/\//g, "");
-        const url = "/api/issues/" + currentProject;
-        const projectTitle = document.getElementById("projectTitle");
-        const issueDisplay = document.getElementById("issueDisplay");
-        const newIssueForm = document.getElementById("newIssue");
+  <script src="../public/js/issue.js"></script>
+  <script src="../public/js/utils/createIssueCard.js"></script>
+  <script src="../public/js/utils/fetchIssues.js"></script>
+  <script src="../public/js/utils/makeAjaxRequest.js"></script>
+  
+  <script src="../public/js/utils/handleClickIssueContainer.js"></script>
+  <script src="../public/js/utils/handleCloseReopenIssue.js"></script>
+  <script src="../public/js/utils/handleDeleteIssue.js"></script>
+  <script src="../public/js/utils/handleSubmitNewIssue.js"></script>
 
-        function makeAjaxRequest(type, url, data, callback) {
-          const xhr = new XMLHttpRequest();
-          xhr.open(type, url, true);
-          xhr.setRequestHeader(
-            "Content-Type",
-            "application/x-www-form-urlencoded; charset=UTF-8"
-          );
-
-          xhr.onload = function () {
-            if (xhr.status === 200) {
-              const responseData = JSON.parse(xhr.responseText);
-              callback(responseData);
-            } else {
-              console.error("Error:", xhr.status, xhr.statusText);
-            }
-          };
-
-          xhr.onerror =  () => console.error("Network Error");
-          xhr.send(data);
-        }
-
-        const loadIssues = () => {
-          makeAjaxRequest("GET", url, null, function (data) {
-            projectTitle.textContent = "All issues for: " + currentProject;
-
-            const issues = data.map((issue) => {
-              const openstatus = issue.open ? "open" : "closed";
-              const actionText = issue.open ? "close" : "reopen";
-
-              return `
-                            <div class="issue ${openstatus}">
-                                <p class="id">id: ${issue._id}</p>
-                                <h3>${issue.issue_title} - (${openstatus})</h3>
-                                <br>
-                                <p>${issue.issue_text}</p>
-                                <p>${issue.status_text}</p>
-                                <br>
-                                <p class="id"><b>Created by:</b> ${issue.created_by}  <b>Assigned to:</b> ${issue.assigned_to}</p>
-                                <p class="id"><b>Created on:</b> ${issue.created_on}  <b>Last updated:</b> ${issue.updated_on}</p>
-                                <br>
-                                
-                                <button class="toggleIssue" data-id="${issue._id}">${actionText}</button>
-                                <button class="deleteIssue" data-id="${issue._id}">delete</button>
-                            </div>
-                        `;
-            });
-            
-
-            issueDisplay.innerHTML = issues.join("");
-          });
-        }
-
-        loadIssues(); // Load issues initially
-
-        // Submit new issue
-        newIssueForm.addEventListener("submit", function (event) {
-          event.preventDefault();
-          this.action = `/api/issues/${currentProject}`;
-          makeAjaxRequest(
-            "POST",
-            url,
-            new URLSearchParams(new FormData(this)),
-            (data) => window.location.reload(true)
-          );
-        });
-
-        // Event delegation for toggle and delete buttons
-        issueDisplay.addEventListener("click", (event) => {
-          const { target } = event;
-
-          if (target.classList.contains("toggleIssue")) {
-            event.preventDefault();
-            const itemId = target.getAttribute("data-id");
-            const data = { _id: itemId };
-            const actionText = target.textContent.toLowerCase();
-            data.open = actionText === "reopen";
-
-            const confirmationMessage = `Are you sure you want to ${actionText} this issue?`;
-            const userConfirmation = confirm(confirmationMessage);
-
-            if (userConfirmation) {
-              makeAjaxRequest(
-                "PUT",
-                url,
-                new URLSearchParams(data),
-                (response) => {
-                  alert(response);
-                  loadIssues(); // Reload issues after the action
-                }
-              );
-            }
-          } else if (target.classList.contains("deleteIssue")) {
-            event.preventDefault();
-            const itemId = target.getAttribute("data-id");
-            const data = { _id: itemId };
-
-            const deleteConfirmation = confirm(
-              "Are you sure you want to delete this issue?"
-            );
-
-            if (deleteConfirmation) {
-              makeAjaxRequest(
-                "DELETE",
-                url,
-                new URLSearchParams(data),
-                (response) => {
-                  alert(response);
-                  loadIssues(); // Reload issues after the action
-                }
-              );
-            }
-          }
-        });
-      });
-    </script>
   </body>
 </html>
